@@ -4,3 +4,72 @@ Most of the solution is already written out for you. Your challenge is to handle
 Consider what data is irrelevant. What can we drop from the dataset? How do we drop it? 
 
 What exceptions should be considered (missing values), and how do we handle those? 
+
+## sklearn & Other Functions
+sklearn (Scikit-learn) is a python ML library that provides tools for prototyping models. 
+
+### transform_dataset 
+```le = preprocessing.LabelEncoder()```
+
+A LabelEncoder instance converts string categories into numeric values. This is called label mapping. 
+
+```
+cols = ["Sex", "Embarked"]
+
+for col in cols:
+  train[col] = le.fit_transform(train[col])
+  test[col] = le.transform(test[col])
+```
+
+Here, we specify the columns in both datasets that need to be encoded.
+
+The ```fit_transform``` function learns the mapping from categories to numbers, and applies existing mapping to new data. 
+
+### predict
+This is where we will train a logistic regression model. A logistic regression model predicts the probability that a specific outcome will occur.
+
+```
+y = train["Survived"]
+x = train.drop("Survived", axis=1)
+```
+
+This is simply splitting the data into the input and output. The drop() function in pandas creates a new DataFrame that is a copy of train, without the "Survived" column. This is what is in x.
+
+The "Survived" column is what y is. 
+
+```
+x_train, x_val, y_train, y_val = train_test_split(x, y, test_size=0.2, random_state=42)
+```
+
+The function ```train_test_split()``` splits the data into what will be used to train the model, and what will be used to validate the model's accuracy.
+
+We set 20% of the data to validating the model, and 80% to training (this is pretty standard in training ML models).
+
+```
+model = LogisticRegression(max_iter=1000)
+model.fit(x_train, y_train)
+```
+
+This is where we actually create the Logistic Regression model, and train it with our data, essentially asking it to learn the relationship between the input and output.
+
+```
+score = model.score(x_val, y_val)
+print(f"Validation accuracy: {score:.4f}")
+```
+
+This basically scores how accurate the model was.
+
+```
+predictions = model.predict(test)
+```
+
+This is a different predict function from sklearn! This is where the model actually makes the prediction with the given test data.
+
+```
+predictions_df = pd.DataFrame({
+    'PassengerId': test['PassengerId'],
+    'Survived': predictions
+})
+```
+
+Finally, we just format the predictions into a DataFrame! 
