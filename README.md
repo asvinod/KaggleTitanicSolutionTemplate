@@ -9,21 +9,24 @@ What exceptions should be considered (missing values), and how do we handle thos
 sklearn (Scikit-learn) is a python ML library that provides tools for prototyping models. 
 
 ### transform_dataset 
-```le = preprocessing.LabelEncoder()```
-
 A LabelEncoder instance converts string categories into numeric values. This is called label mapping. 
 
 ```
 cols = ["Sex", "Embarked"]
 
 for col in cols:
-  train[col] = le.fit_transform(train[col])
-  test[col] = le.transform(test[col])
+    le = preprocessing.LabelEncoder()
+    le.fit(list(train[col].astype(str)) + list(test[col].astype(str)))
+    train[col] = le.transform(train[col].astype(str))
+    test[col] = le.transform(test[col].astype(str))
 ```
 
 Here, we specify the columns in both datasets that need to be encoded.
 
-The ```fit_transform``` function learns the mapping from categories to numbers, and applies existing mapping to new data. 
+A LabelEncoder instance converts string categories into numeric values. This is called label mapping. 
+
+The fit function learns the mapping of input values to numerical values. The transform function applies the mapped learning to the actual data. 
+
 
 ### predict
 This is where we will train a logistic regression model. A logistic regression model predicts the probability that a specific outcome will occur.
