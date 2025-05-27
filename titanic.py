@@ -1,19 +1,27 @@
 ## Import necessary libraries
 
+
+from sklearn import preprocessing
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+
 # Remove irrelevant data 
-def clean_dataset(df): 
+def clean_dataset(train): 
     # What is the irreelvant data here? 
-    
+
     # Are there missing values? 
 
-def transform_dataset(test, train):
-    le = preprocessing.LabelEncoder()
-    
+    # Does not hold int value, replace with char 
+    return train
+
+def transform_dataset(test, train):    
     cols = ["Sex", "Embarked"]
 
     for col in cols:
-        train[col] = le.fit_transform(train[col])
-        test[col] = le.transform(test[col])
+        le = preprocessing.LabelEncoder()
+        le.fit(list(train[col].astype(str)) + list(test[col].astype(str)))
+        train[col] = le.transform(train[col].astype(str))
+        test[col] = le.transform(test[col].astype(str))
 
 def predict(test, train):
     y = train["Survived"]

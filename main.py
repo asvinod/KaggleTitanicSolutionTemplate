@@ -11,7 +11,7 @@ def main():
     transform_dataset(test, train)
 
     predicted = predict(test, train)
-    predicted.to_csv("input/prediction.csv", index=False)
+    predicted.to_csv('output/prediction.csv', index=False)
 
 
 if __name__ == "__main__":
