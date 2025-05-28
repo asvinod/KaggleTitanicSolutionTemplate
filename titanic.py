@@ -8,7 +8,7 @@ from sklearn.model_selection import train_test_split
 # Remove irrelevant data 
 def clean_dataset(train): 
     # What is the irreelvant data here? 
-
+    
     # Are there missing values? 
 
     # Does not hold int value, replace with char 
