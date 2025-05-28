@@ -1,3 +1,4 @@
+Titanic Problem: https://www.kaggle.com/competitions/titanic/ 
 # KaggleTitanicSolution
 Most of the solution is already written out for you. Your challenge is to handle simple filtering with the given dataset. Credits to Asad Ali (Here is this article: https://medium.com/@asaadaali/how-i-solved-the-kaggles-titanic-machine-learning-from-disaster-competition-1d24f998059f) I'd reccomend taking a read after completing the dataset cleaning portion yourself. 
 
