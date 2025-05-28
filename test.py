@@ -20,6 +20,10 @@ test_csv = pd.read_csv('csv_files/test.csv')
 first_3 = test_csv.head(3)
 #print(first_3)
 
+#dropping 
+# drop function for dropping rows
+# set axis to 1 to drop columns 
+
 #df['col_name']
 names = test_csv['Name']
 
